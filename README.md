@@ -5,7 +5,7 @@ Vou registrar o meu avanço na línguagem Java
 # Índice
 - [Progresso](#progresso)
 - [Básico](#básico)
- - [Variáveis](#variáveis-e-constantes)
+  - [Variáveis](#variáveis-e-constantes)
 
 ## Progresso
 
@@ -38,15 +38,15 @@ Vou registrar o meu avanço na línguagem Java
 **Regras de Nomenclatura:**
 
 - camelCase: Começa com letra minúscula, e depois maiúscula pra primeira letra de cada palavra
- - primeiroNome
- - calcularTotal
- - taxaDeJuros
+  - primeiroNome
+  - calcularTotal
+  - taxaDeJuros
 
 - UPPER_SNAKE_CASE: Toda as palavras em maiúsculo com o underline separando-as
- - VALOR_MAXIMO
- - PONTUACAO_MINIMA
- - MAPA_DE_ERROS 
+  - VALOR_MAXIMO
+  - PONTUACAO_MINIMA
+  - MAPA_DE_ERROS 
 
 - Gerais
- - Nomes podem conter letras, dígitos, sublinhados e sinais de dólar.
- - Nomes devem começar com uma letra, um sublinhado _, ou um sinal de dólar $.
+  - Nomes podem conter letras, dígitos, sublinhados e sinais de dólar.
+  - Nomes devem começar com uma letra, um sublinhado _, ou um sinal de dólar $.
