@@ -1,6 +1,10 @@
 # Aprendendo Java (Vindo do Python)
 
-Esse repositório serve para demarcar o meu progresso nessa migração de Python para Java.
+Este repositório reúne minhas anotações, exemplos e exercícios enquanto estudo Java.
+
+Meu objetivo é registrar a evolução do aprendizado, criar um material de consulta e comparar conceitos que já conheço em Python com a forma como eles funcionam em Java.
+
+> **Observação:** Este material utiliza o **Java 25**. Alguns recursos apresentados (como Switch Expressions e Pattern Matching) podem não estar disponíveis em versões mais antigas da linguagem.
 
 # Índice
 - [Progresso](#progresso)
@@ -23,8 +27,14 @@ Esse repositório serve para demarcar o meu progresso nessa migração de Python
   - [Comentários](#comentários)
     - [Atalhos](#atalhos-para-comentar)
   - [Condicionais](#condicionais-if-else-if-else-switch-case)
-  - [Loops]
-- [POO]
+    - [If, Else e Else-if](#if-else-e-else-if)
+    - [Operador Ternário](#operador-ternário)
+    - [Switch](#switch)
+  - [Loops](#loops)
+    - [For e For-each](#for-e-for-each)
+    - [While e Do-While](#while-e-do-while)
+    - [Controle de Repetição](#controle-de-repetição-break-e-continue)
+  -[Métodos](#métodos)
 
 # Progresso
 
@@ -36,8 +46,8 @@ Esse repositório serve para demarcar o meu progresso nessa migração de Python
 - [x] String
 - [x] Operadores
 - [x] Entrada
-- [ ] Condicionais
-- [ ] Loops
+- [x] Condicionais
+- [x] Loops
 - [ ] Métodos
 - [ ] Arrays
 - [ ] Classes
@@ -57,6 +67,7 @@ Esse repositório serve para demarcar o meu progresso nessa migração de Python
 
 ---
 
+
 # Básico:
 
 O Java é uma linguagem que possui forte integração com o paradigma da **Programação Orientada a Objetos (POO)**.
@@ -70,6 +81,7 @@ System.out.println("Hello, World!");
 ```
 
 - o `println()` serve para quebrar a linha, porém existe o `print()`
+
   ```java
   System.out.println("E");
   System.out.println("S");
@@ -78,8 +90,8 @@ System.out.println("Hello, World!");
   S
   */
 
-  System.out.print("E")
-  System.out.print("S")
+  System.out.print("E");
+  System.out.print("S");
   // Saída: ES
   ```
 
@@ -118,7 +130,7 @@ public class Main { // Define uma classe
     - Observação: <br>
     Apesar de permitido, iniciar identificadores com `_` ou `$` não é recomendado em código Java moderno.
 
-## Variáveis e Constantes:
+## Variáveis e Constantes
 
 O Java segue um padrão para a inicialização de variáveis e constantes:
 
@@ -163,12 +175,14 @@ Java possui 8 tipos primitivos:
 Casting é a conversão de um tipo para o outro, tanto de forma implícita e explícita
 
 - int para double (acontece de forma implícita), sem perda de dados
+
   ```java
   int numero = 5;
   double decimal = numero; // 5.0
   ```
 
 - double pra int (acontece de forma explícita), a parte decimal é descartada
+
   ```java
   double decimal = 10.5;
   int numero = (int) decimal; // 10
@@ -179,6 +193,7 @@ Casting é a conversão de um tipo para o outro, tanto de forma implícita e exp
 Em Java, `String` não é um tipo primitivo, ela é uma classe, ou seja, um objeto que possuí métodos.
 
 1. Manipulação e Métodos:
+
     ```java
     String texto = "  Dev Java  ";
 
@@ -191,6 +206,7 @@ Em Java, `String` não é um tipo primitivo, ela é uma classe, ou seja, um obje
     ```
 
     1.1 **`String` é imutável**
+
     ```java
     String texto = "Java";
 
@@ -202,8 +218,38 @@ Em Java, `String` não é um tipo primitivo, ela é uma classe, ou seja, um obje
     System.out.println(texto); // java
     ```
 
+    1.2 Checagem de `String` vazia
+
+    - `isEmpty()` retorna `true` quando a `String` possui comprimento igual a zero.
+
+      ```java
+      String texto1 = "";
+      String texto2 = "Java";
+
+      System.out.println(texto1.isEmpty()); // true
+      System.out.println(texto2.isEmpty()); // false
+      ```
+    
+    - `isBlank()` retorna `true` quando a `String` está vazia ou contém apenas espaços em branco.
+
+      ```java
+      String texto1 = "";
+      String texto2 = "   ";
+      String texto3 = "Java";
+
+      System.out.println(texto1.isBlank()); // true
+      System.out.println(texto2.isBlank()); // true
+      System.out.println(texto3.isBlank()); // false
+      ```
+
+      | Método | `""` | `"   "` | `"Java"` |
+      | ------ | :--: | :-----: | :------: |
+      | `isEmpty()` | `true` | `false` | `false` |
+      | `isBlank()` | `true` |   `true` | `false` |
+
 2. Converter para String:
 - Para converter um tipo para String, usa-se `String.valueOf()`.
+
     ```java
     // int -> String
     String texto = String.valueOf(200); // "200"
@@ -212,11 +258,12 @@ Em Java, `String` não é um tipo primitivo, ela é uma classe, ou seja, um obje
     String texto2 = String.valueOf(12.7); // "12.7"
 
     // boolean -> String
-    String texto3 = String.valueOf(true) // "true"
+    String texto3 = String.valueOf(true); // "true"
     ```
 
 3. Converter String para tipo:
 - Para converter uma String para um tipo primitivo nós usamo um Wrapper do tipo necessário.
+
     ```java
     // String -> int
     int numero = Integer.parseInt("20"); // 20
@@ -227,6 +274,7 @@ Em Java, `String` não é um tipo primitivo, ela é uma classe, ou seja, um obje
     // String -> boolean
     boolean booleano = Boolean.parseBoolean("True"); // true
     ```
+
     - Observação sobre `boolean`:
     O `parseBoolean()` é case-insensitive, logo, "true" pode ser escrito todo em minúsculo, maiúsculo ou captalizado, o resultado será `true`, e qualquer valor que não seja `true` será `false`, ou seja, se alguém colocar "verdadeiro" o resultado será `false`.
 
@@ -239,7 +287,7 @@ var numero = 2; // int
 var decimal = 2.5; // double
 
 var texto; // erro, pois o compilador não será capaz de fazer a inferência do tipo
-var numero = "45"; // erro, "var" não significa que a variável é dinâmica, "numero" é um "int", ele só vai aceitar valores "int"
+numero = "texto"; // erro, "var" não significa que a variável é dinâmica, "numero" é um "int", ele só vai aceitar valores "int"
 ```
 
 ## Operadores Aritméticos
@@ -277,6 +325,7 @@ O resultado da divisão (`/`), depende do tipo dos operadores:
 
 - Diferença entre `x++` e `++x`
   - Pós-incremento: Atribui o valor de x e depois incrementa o valor em x;
+
     ```java
     int x = 5;
     int y = x++;
@@ -285,6 +334,7 @@ O resultado da divisão (`/`), depende do tipo dos operadores:
     System.out.println(y); // 5
     ```
   - Pré-incremento: Incrementa o valor em x e depois atribui o valor de x.
+
       ```java
       int x = 5;
       int y = ++x;
@@ -307,9 +357,10 @@ Os operadores relacionais comparam dois valores e resulta em um `boolean`
 | `<=` | Menor ou igual a | 8 <= 5 | `false` |
 
 - O operador "igual a" (`==`) não funciona para comparar `Strings`, no lugar usamos o `.equals()`
+
   ```java
-  String a = "Oi";
-  String b = "Oi";
+  String a = new String("Oi");
+  String b = new String("Oi");
 
   System.out.println(a == b); // false
   System.out.println(a.equals(b)); // true
@@ -435,6 +486,383 @@ em bloco
   - Mac: `Shift` + `Option` + `A`
     - Para comentário em bloco selecione todas as linhas desejadas
 
-## Arrays
 
 ## Condicionais (if, else-if, else, switch-case)
+
+As estruturas condicionais permitem que o programa execute diferentes blocos de código dependendo do resultado de uma condição.
+
+### if, else e else-if
+
+O `if` executa um bloco de código apenas se a condição for `true`.
+
+```java
+int idade = 20;
+
+if (idade >= 18) {
+    System.out.println("Maior de idade");
+}
+```
+
+Quando existe uma segunda possibilidade, utilizamos o `else`.
+
+```java
+int idade = 16;
+
+if (idade >= 18) {
+    System.out.println("Maior de idade");
+} else {
+    System.out.println("Menor de idade");
+}
+```
+
+Quando existem várias condições diferentes, utilizamos o `else if`.
+
+```java
+int nota = 60;
+
+if (nota >= 90) {
+    System.out.println("Excelente");
+} else if (nota >= 70) {
+    System.out.println("Aprovado");
+} else if (nota >= 60) {
+    System.out.println("Recuperação");
+} else {
+    System.out.println("Reprovado");
+}
+```
+
+- Assim que uma condição for verdadeira, as demais não serão avaliadas.
+
+### Operador Ternário
+
+Quando queremos escolher entre apenas dois valores, podemos utilizar o operador ternário (`? :`).
+
+Sintaxe: `condicao ? valorSeTrue : valorSeFalse;`
+
+Exemplo:
+
+```java
+int idade = 20;
+
+String mensagem = idade >= 18 ? "Maior de idade" : "Menor de idade";
+
+System.out.println(mensagem); // Maior de idade
+```
+
+### switch
+
+O `switch` é utilizado quando precisamos comparar uma mesma variável com vários valores diferentes.
+
+```java
+int dia = 3;
+
+switch (dia) {
+    case 1:
+        System.out.println("Domingo");
+        break;
+
+    case 2:
+        System.out.println("Segunda-feira");
+        break;
+
+    case 3:
+        System.out.println("Terça-feira");
+        break;
+
+    default:
+        System.out.println("Dia inválido");
+}
+```
+
+- O `break` encerra o `switch`.
+- Sem o `break`, o programa continua executando os próximos casos.
+
+Exemplo sem `break`:
+
+```java
+int numero = 1;
+
+switch (numero) {
+    case 1:
+        System.out.println("Um");
+
+    case 2:
+        System.out.println("Dois");
+
+    case 3:
+        System.out.println("Três");
+}
+
+/*Saída:
+Um
+Dois
+Três
+*/
+```
+
+### switch com múltiplos casos
+
+É possível executar o mesmo bloco para vários valores.
+
+```java
+char vogal = 'A';
+
+switch (vogal) {
+    case 'A':
+    case 'E':
+    case 'I':
+    case 'O':
+    case 'U':
+        System.out.println("É uma vogal");
+        break;
+
+    default:
+        System.out.println("Não é uma vogal");
+}
+```
+
+### Switch Expression (Java 14+)
+
+Nas versões mais recentes do Java, o `switch` pode ser utilizado como uma expressão.
+
+```java
+int dia = 2;
+
+String nomeDia = switch (dia) {
+    case 1 -> "Domingo";
+    case 2 -> "Segunda-feira";
+    case 3 -> "Terça-feira";
+    default -> "Dia inválido";
+};
+
+System.out.println(nomeDia); // Segunda-feira
+```
+
+Esse formato elimina a necessidade do `break` e deixa o código mais limpo.
+
+
+### Pattern Matching no switch (Java 21+)
+
+Nas versões mais recentes do Java, o `switch` também pode realizar verificações de tipo, dispensando o uso de `instanceof` e de casts.
+
+```java
+Object objeto = "Olá";
+
+switch (objeto) {
+    case String texto -> System.out.println("String: " + texto);
+    case Integer numero -> System.out.println("Inteiro: " + numero);
+    case null -> System.out.println("Valor nulo");
+    default -> System.out.println("Tipo desconhecido");
+}
+```
+
+Nesse exemplo, caso `objeto` seja uma `String`, a variável `texto` já será criada com o tipo correto, não sendo necessário fazer cast.
+
+### Observações
+
+- As condições do `if` sempre devem resultar em um `boolean`.
+- Diferente do Python, Java exige que a condição seja explicitamente booleana.
+
+Errado:
+
+```java
+int numero = 10;
+
+if (numero) { // Erro
+    System.out.println("Olá");
+}
+
+int numero = 10;
+
+if (numero > 0) { // Certo
+    System.out.println("Olá");
+}
+```
+
+- O `switch` funciona com tipos como `byte`, `short`, `int`, `char`, `String` e `enum`, mas não aceita `boolean`, `float`, `double` ou `long`.
+
+## Loops
+
+Os laços de repetição servem para executar um bloco de código várias vezes enquanto uma condição for verdadeira
+
+O Java possui 4  laços de repetiçoes principais: `for`, `for-each`, `while` e `do-while`
+
+### For e For-Each
+
+Utilizamos `for` quando sabemos a quantidade exata de repetições que o laço deve fazer
+
+- Sintaxe: `for (inicialização; condição; incremento/decremento) {...}`
+
+  ```java
+  for (int = 0; i < 5; i++) {
+    System.out.println("Índice: " + i); // imprime de 0 a 4
+  }
+  ```
+
+Utilizamos `for-each` para percorremos arrays e coleções como (`List`, `Set`, etc)
+
+- Sintaxe: `for (tipo elemento : array) {...}`
+
+  ```java
+  String[] frutas = {"Maça", "Banana", "Laranja"};
+
+  for (String fruta : frutas) {
+    System.out.println("Fruta: " + fruta);
+  }
+  ```
+
+### While e Do-While
+
+Utilizamos `while` quando não sabemos quantas repetições serão necessárias
+
+O `while` avalia a condição **antes** de executar o bloco de código. Se a condição for false logo no início, o bloco não será executado nenhuma vez
+
+- Sintaxe: `while (condicao) {...}`
+
+  ```java
+  int count = 1
+
+  while (count <= 10) {
+    System.out.print(count + " "); // 1 2 3 4 5 6 7 8 9 10
+    count++;
+  }
+  ```
+
+Diferente do `while` o `do-while` avalia a condição **depois** de executar o bloco de código. Isso faz com que o bloco sempre seja executado no mínimo 1 vez.
+
+- Sintaxe: `do {...} while (condicao);`
+
+  ```java
+  int opcao = 0;
+
+  do {
+    System.out.println("Escolha uma opção: ");
+    System.out.println("1 - Continuar | 0 - Sair");
+    // Teria um Scanner para ler a resposta
+  } while (opcao != 0);
+  ```
+
+### Controle de Repetição: Break e Continue
+
+O `break` e `continue` são usados para controlar a execução de laços de repetições, geralmente combinados com um `if` para agirem em momentos específicos
+
+- `break` serve para você encerrar o laço. A execução vai pra primeira linha depois do loop
+- `continue` serve para você pular a execuçã atual do loop e ir direto pra próxima
+
+  ```java
+  // Exemplo com break
+  for (int i = 1; i <= 10; i++) {
+      if (i == 5) {
+          break; // Sai do loop quando 'i' for igual a 5
+      }
+      System.out.print(i + " "); // 1 2 3 4
+  }
+
+  // Exemplo com continue
+  for (int i = 1; i <= 5; i++) {
+      if (i == 3) {
+          continue; // Pula a impressão quando 'i' for 3
+      }
+      System.out.print(i + " "); // Saída: 1 2 4 5
+  }
+  ```
+
+## Métodos
+
+Métodos, também conhecidos como funções em algumas linguagens, são blocos de códigos que executam uma função específica. Eles ajudam a organizar o programa e evitar repetição de código, (*"Don't repeat yourself" - DRY*)
+
+- Estrutura de um método: `modificador tipoDeRetorno nomeDoMetodo(tipo parametro) {...}`
+
+  ```java
+  public int somar(int x, int y) {
+    return x + y;
+  }
+  ```
+
+  - Observação: um método pode ter vários parâmetro ou nenhum
+
+### Método com retorno
+
+Retorna um valor para quem chamou
+
+```java
+public double calcularMedia(double nota1, double nota2) {
+    return (nota1 + nota2) / 2;
+  }
+
+double media = calcularMedia(8, 6);
+
+System.out.println("Média: " + media); // 7
+```
+
+  - Observação: o retorno tem que ser compatível com o tipo declarado no método
+
+### Método sem retorno (`void`)
+
+Quando o método executa uma ação e não devolver nenhum valor
+
+```java
+public void bemVindo() {
+  System.out.println("Bem-vindo!");
+}
+
+bemVindo(); // Bem-vindo!
+```
+
+### Método `static`
+
+Um método `static` pertence a classe e pode ser chamado sem criar um objeto
+
+```java
+public class Calculadora {
+
+  public static int multiplicar(int x, int y) {
+      return x * y;
+  }
+  
+  public static void main(String[] args) {
+    int resultado =  Calculadora.multiplicar(5, 8);
+
+    System.out.println(resultado); // 40
+  }
+
+}
+```
+
+### Método de Instância
+
+Precisa criar um objeto da classe
+
+```java
+public class Pessoa {
+
+  public void falar() {
+      System.out.println("Olá!");
+  }
+
+  Pessoa pessoa = new Pessoa();
+
+  pessoa.falar(); // Olá!
+
+}
+```
+
+### Sobrecarga de Métodos (Overload)
+
+Em Java, é possível ter métodos com o mesmo nome, mas parâmetros diferentes
+
+O Java escolhe qual método usar baseado no argumento
+
+```java
+public class Calculadora {
+
+  public int somar(int a, int b) {
+      return a + b;
+  }
+
+  public double somar(double a, double b) {
+      return a + b;
+  }
+
+}
+```
