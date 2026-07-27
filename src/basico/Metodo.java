@@ -1,3 +1,5 @@
+package src.basico;
+
 public class Metodo {
     // métodos -> static (void/type/String) nome(parâmetro)
     // parâmetros -> tipo nome

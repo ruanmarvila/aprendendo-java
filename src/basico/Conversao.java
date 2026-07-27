@@ -1,3 +1,5 @@
+package src.basico;
+
 public class Conversao {
     public static void main(String[] args) {
         // int para double

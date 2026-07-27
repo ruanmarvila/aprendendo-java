@@ -1,3 +1,5 @@
+package src.basico;
+
 import java.util.Scanner;
 
 public class Condicionais {
@@ -45,6 +47,8 @@ public class Condicionais {
         }
 
         System.out.println("Você nasceu na " + estacao);
+
+        // Enums
 
         scanner.close(); // tem que fechar SEMPRE
 

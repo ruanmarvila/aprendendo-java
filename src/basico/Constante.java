@@ -1,3 +1,5 @@
+package src.basico;
+
 public class Constante {
     public static void main(String[] args) {
         // o final indica que é uma constante

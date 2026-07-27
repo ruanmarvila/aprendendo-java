@@ -1,3 +1,5 @@
+package src.basico;
+
 import java.util.Scanner; // Preciso do Scanner pra consguir ler entrada (input) no terminal
 
 public class Saudacao {

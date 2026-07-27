@@ -1,3 +1,5 @@
+package src.basico;
+
 public class Variaveis {
     public static void main(String[] args) {
         int inteiro = 2; // int pra números inteiros 

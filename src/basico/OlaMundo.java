@@ -1,3 +1,5 @@
+package src.basico;
+
 public class OlaMundo { // Classe
     public static void main(String[] args) { // Método
         // Lembrar de colocar ; no final

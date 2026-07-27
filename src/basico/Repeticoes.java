@@ -1,3 +1,5 @@
+package src.basico;
+
 public class Repeticoes {
     public static void main(String[] args) {
         // for loop -> for (declarar variável inicial, condição de parada, "passos")

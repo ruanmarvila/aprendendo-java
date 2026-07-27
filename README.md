@@ -1,6 +1,6 @@
 # Aprendendo Java (Vindo do Python)
 
-Este repositório reúne minhas anotações, exemplos e exercícios enquanto estudo Java.
+Este repositório reúne minhas anotações, exemplos e exercícios enquanto estudo Java. O conteúdo é atualizado enquanto avanço nos estudos, então a organização acompanha a minha evolução na linguagem.
 
 Meu objetivo é registrar a evolução do aprendizado, criar um material de consulta e comparar conceitos que já conheço em Python com a forma como eles funcionam em Java.
 
@@ -18,12 +18,18 @@ Meu objetivo é registrar a evolução do aprendizado, criar um material de cons
   - [Tipos Primitivos](#tipos-primitivos)
   - [Casting](#casting)
   - [Strings](#strings)
-  - [Operadores Aritméticos](#operadores-aritméticos)
-  - [Operadores Relacionais](#operadores-relacionais)
-  - [Operadores Lógicos](#operadores-lógicos)
-    - [Funcionamento](#como-cada-operador-funciona)
-    - [Curto-circuito](#curto-circuito-short-circuit)
+  - [Null](#null)
+  - [Inferência de Tipo](#inferência-de-tipo-var)
+  - [Operadores](#operadores)
+    - [Operadores Aritméticos](#operadores-aritméticos)
+    - [Operadores Relacionais](#operadores-relacionais)
+    - [Operadores Lógicos](#operadores-lógicos)
+      - [Funcionamento](#como-cada-operador-funciona)
+      - [Curto-circuito](#curto-circuito-short-circuit)
+  - [Classe Math](#classe-math)
+  - [Classe Random](#classe-random)
   - [Entrada de Dados](#entrada-de-dados)
+  - [Saída de Dados](#saída-de-dados)
   - [Comentários](#comentários)
     - [Atalhos](#atalhos-para-comentar)
   - [Condicionais](#condicionais-if-else-if-else-switch-case)
@@ -34,41 +40,56 @@ Meu objetivo é registrar a evolução do aprendizado, criar um material de cons
     - [For e For-each](#for-e-for-each)
     - [While e Do-While](#while-e-do-while)
     - [Controle de Repetição](#controle-de-repetição-break-e-continue)
-  -[Métodos](#métodos)
+  - [Métodos](#métodos)
+    - [Métodos com Retorno](#método-com-retorno)
+    - [Métodos void](#método-sem-retorno-void)
+    - [Métodos static](#método-static)
+    - [Sobrecarga de Métodos](#sobrecarga-de-métodos-overload)
+    - [Parâmetros x Argumentos](#parâmetro-x-argumento)
+  - [Arrays](#arrays)
+    - [Arrays](#arrays-com-tamanho-fixo)
+    - [Matrizes](#arrays-multidimensionados)
+    - [ArrayList](#arrays-dinâmicos)
+    - [Diferenças](#diferenças-entre-array-e-arraylist)
 
 # Progresso
-
-- [x] Hello World
-- [x] Estrutura
-- [x] Variáveis
-- [x] Tipos primitivos
-- [x] Casting
-- [x] String
-- [x] Operadores
-- [x] Entrada
-- [x] Condicionais
-- [x] Loops
-- [ ] Métodos
-- [ ] Arrays
-- [ ] Classes
-- [ ] Objetos
-- [ ] Encapsulamento
-- [ ] Herança
-- [ ] Polimorfismo
-- [ ] Interfaces
-- [ ] Exceções
-- [ ] Collections
-- [ ] Generics
-- [ ] Streams
-- [ ] Lambdas
-- [ ] Maven
-- [ ] JUnit
+- [x] Conceitos Básicos
+  - [x] Hello World
+  - [x] Estrutura
+  - [x] Variáveis
+  - [x] Tipos primitivos
+  - [x] Casting
+  - [x] String
+  - [x] Operadores
+  - [x] Entrada
+  - [x] Condicionais
+  - [x] Loops
+  - [x] Métodos
+  - [x] Arrays
+- [ ] POO
+  - [ ] Classes
+  - [ ] Objetos
+  - [ ] Encapsulamento
+  - [ ] Construtores
+  - [ ] Herança
+  - [ ] Polimorfismo
+  - [ ] Classes Abstratas
+  - [ ] Interfaces
+  - [ ] Exceções
+- [ ] Java Moderno
+  - [ ] Collections
+  - [ ] Generics
+  - [ ] Lambdas
+  - [ ] Streams
+  - [ ] Records
+  - [ ] Maven
+  - [ ] JUnit
 - [ ] Spring Boot
 
 ---
 
 
-# Básico:
+# Básico
 
 O Java é uma linguagem que possui forte integração com o paradigma da **Programação Orientada a Objetos (POO)**.
 
@@ -80,7 +101,7 @@ Em Java, para exibir algo no console, usamos:
 System.out.println("Hello, World!");
 ```
 
-- o `println()` serve para quebrar a linha, porém existe o `print()`
+- o `println()` serve para quebrar a linha, porém existe o `print()`.
 
   ```java
   System.out.println("E");
@@ -109,7 +130,7 @@ public class Main { // Define uma classe
 
 ## Nomenclatura
 
-- **camelCase:** Começa com letra minúscula, e depois maiúscula pra primeira letra de cada palavra $\rightarrow$ Variáveis e Métodos
+- **camelCase:** Começa com letra minúscula, e depois maiúscula para a primeira letra de cada palavra $\rightarrow$ Variáveis e Métodos
   - primeiroNome
   - calcularTotal
   - taxaDeJuros
@@ -117,7 +138,7 @@ public class Main { // Define uma classe
 - **UPPER_SNAKE_CASE:** Todas as palavras em maiúsculo com o underline separando-as $\rightarrow$ Constantes
   - VALOR_MAXIMO
   - PONTUACAO_MINIMA
-  - MAPA_DE_ERROS 
+  - MAPA_DE_ERROS
 
 - **PascalCase:** Toda palavra começa com a primeira letra maiúscula $\rightarrow$ Classes
   - Main
@@ -127,32 +148,33 @@ public class Main { // Define uma classe
 - **Gerais:**
   - Nomes podem conter letras, dígitos, sublinhados e sinais de dólar.
   - Nomes devem começar com uma letra, um sublinhado `_`, ou um sinal de dólar `$`.
-    - Observação: <br>
-    Apesar de permitido, iniciar identificadores com `_` ou `$` não é recomendado em código Java moderno.
+
+    > **Observação:** Apesar de permitido, iniciar identificadores com `_` ou `$` não é recomendado em código Java moderno.
 
 ## Variáveis e Constantes
 
-O Java segue um padrão para a inicialização de variáveis e constantes:
+O Java segue um padrão para a inicialização de variáveis e constantes.
 
 ### Variáveis
 
 Variáveis armazenam valores que podem ser alterados durante o programa.
 
-- Síntaxe: `tipo nome = valor;`
+- Sintaxe: `tipo nome = valor;`
 
-```java
-int numero = 10;
-```
+  ```java
+  int numero = 10;
+  ```
 
 ### Constantes
 
 Diferente das variáveis, constantes não podem ter o valor alterado após sua inicialização. Para isso, elas usam o modificador `final` para indicar ao compilador que aquilo se trata de uma constante.
 
-- Síntaxe: `final tipo NOME = valor;`
+- Sintaxe: `final tipo NOME = valor;`
 
-```java
-final int VALOR_MAXIMO = 100;
-```
+  ```java
+  final int VALOR_MAXIMO = 100;
+  ```
+
 
 ## Tipos Primitivos
 
@@ -169,10 +191,17 @@ Java possui 8 tipos primitivos:
 | char | 16 bits | char letra = 'A'; |
 | boolean | Não definido | boolean ativo = true; |
 
+Além dos tipos primitivos, o Java possui classes equivalentes chamadas Wrappers.
+
+- int -> Integer
+- double -> Double
+- char -> Character
+- boolean -> Boolean
+
 
 ## Casting
 
-Casting é a conversão de um tipo para o outro, tanto de forma implícita e explícita
+Casting é a conversão de um tipo para o outro, tanto de forma implícita e explícita.
 
 - int para double (acontece de forma implícita), sem perda de dados
 
@@ -190,7 +219,7 @@ Casting é a conversão de um tipo para o outro, tanto de forma implícita e exp
 
 ## Strings
 
-Em Java, `String` não é um tipo primitivo, ela é uma classe, ou seja, um objeto que possuí métodos.
+Em Java, `String` não é um tipo primitivo, ela é uma classe, ou seja, um objeto que possui métodos.
 
 1. Manipulação e Métodos:
 
@@ -272,15 +301,28 @@ Em Java, `String` não é um tipo primitivo, ela é uma classe, ou seja, um obje
     double decimal = Double.parseDouble("6.9"); // 6.9
 
     // String -> boolean
-    boolean booleano = Boolean.parseBoolean("True"); // true
+    boolean booleano = Boolean.parseBoolean("true"); // true
     ```
 
-    - Observação sobre `boolean`:
-    O `parseBoolean()` é case-insensitive, logo, "true" pode ser escrito todo em minúsculo, maiúsculo ou captalizado, o resultado será `true`, e qualquer valor que não seja `true` será `false`, ou seja, se alguém colocar "verdadeiro" o resultado será `false`.
+    > **Observação:** O `parseBoolean()` é case-insensitive, logo, "true" pode ser escrito todo em minúsculo, maiúsculo ou captalizado, o resultado será `true`, e qualquer valor que não seja `true` será `false`, ou seja, se alguém colocar "verdadeiro" o resultado será `false`.
+
+## Null
+
+Em Java, `null` representa a ausência de um objeto.
+
+Diferentes dos tipos primitivos, objetos podem não apontar para nenhuma instância.
+
+```java
+String nome = null;
+
+System.out.println(nome); // null
+
+int numero = null; // erro de compilação
+```
 
 ## Inferência de tipo (var)
 
-Quando utilizamos o `var` em vez de um tipo primitivo numa variável, o compilador faz uma inferência do tipo baseado no valor
+Quando utilizamos o `var` em vez de um tipo primitivo numa variável, o compilador faz uma inferência do tipo baseado no valor.
 
 ```java
 var numero = 2; // int
@@ -290,9 +332,13 @@ var texto; // erro, pois o compilador não será capaz de fazer a inferência do
 numero = "texto"; // erro, "var" não significa que a variável é dinâmica, "numero" é um "int", ele só vai aceitar valores "int"
 ```
 
-## Operadores Aritméticos
+> O Java é uma linguagem com tipagem estática, diferente do Python que é dinamicamente tipado
 
-O Java tem cinco operadores aritméticos
+## Operadores
+
+### Operadores Aritméticos
+
+O Java tem cinco operadores aritméticos principais.
 
 | Símbolo | Significado | Exemplo |
 | ------- | ----------- | ------- |
@@ -302,7 +348,7 @@ O Java tem cinco operadores aritméticos
 | `/` | Divisão | `5 / 2` $\rightarrow$ `2` |
 | `%` | Resto da divisão (módulo) | `5 % 2` $\rightarrow$ `1` |
 
-### Observações
+#### Observações
 
 1. Divisão Inteira vs Decimal<br>
 O resultado da divisão (`/`), depende do tipo dos operadores:
@@ -324,7 +370,7 @@ O resultado da divisão (`/`), depende do tipo dos operadores:
     | `x--` / `--x` | `x = x - 1` |
 
 - Diferença entre `x++` e `++x`
-  - Pós-incremento: Atribui o valor de x e depois incrementa o valor em x;
+  - Pós-incremento: Atribui o valor de x e depois incrementa o valor em x
 
     ```java
     int x = 5;
@@ -333,7 +379,7 @@ O resultado da divisão (`/`), depende do tipo dos operadores:
     System.out.println(x); // 6
     System.out.println(y); // 5
     ```
-  - Pré-incremento: Incrementa o valor em x e depois atribui o valor de x.
+  - Pré-incremento: Incrementa o valor em x e depois atribui o valor de x
 
       ```java
       int x = 5;
@@ -343,9 +389,9 @@ O resultado da divisão (`/`), depende do tipo dos operadores:
       System.out.println(y); // 6
       ```
 
-## Operadores Relacionais
+### Operadores Relacionais
 
-Os operadores relacionais comparam dois valores e resulta em um `boolean`
+Os operadores relacionais comparam dois valores e resulta em um `boolean`.
 
 | Operador | Significado | Exemplo | Resultado |
 | -------- | ----------- | ------- | --------- |
@@ -366,7 +412,7 @@ Os operadores relacionais comparam dois valores e resulta em um `boolean`
   System.out.println(a.equals(b)); // true
   ```
 
-## Operadores Lógicos
+### Operadores Lógicos
 
 Os operadores lógicos são utilizados para combinar ou inverter expressões que resultam em um `boolean`.
 
@@ -387,7 +433,7 @@ Os operadores lógicos são utilizados para combinar ou inverter expressões que
     System.out.println(!possuiCarteira); // false
     ```
 
-### Como cada operador funciona
+#### Como cada operador funciona
 
 - `&&` (E): retorna `true` apenas se **ambas** as condições forem verdadeiras.
   ```java
@@ -407,7 +453,7 @@ Os operadores lógicos são utilizados para combinar ou inverter expressões que
   !false // true
   ```
 
-### Curto-circuito (Short-circuit)
+#### Curto-circuito (Short-circuit)
 
 Os operadores `&&` e `||` utilizam **avaliação de curto-circuito**, ou seja, a segunda expressão só é avaliada quando necessário.
 
@@ -429,6 +475,85 @@ System.out.println(x); // 10
 ```
 
 Como a primeira condição já é `false`, a segunda também não é executada.
+
+
+## Classe Math
+
+Em Java, nós temos uma classe para operações matemáticas chamada `Math` do pacote `java.lang` que é importado automaticamente
+
+| Método | Descrição | Exemplo |
+| ------ | --------- | ------- |
+| `Math.abs(x)` | Retorna o valor absoluto | `Math.abs(-6)` $\rightarrow$ `6` |
+| `Math.max(x, y)` | Retorna o maior valor | `Math.max(5, 12)` $\rightarrow$ `12` |
+| `Math.min(x, y)` | Retorna o menor valor | `Math.min(5, 12)` $\rightarrow$ `5` |
+| `Math.sqrt(x)` | Retorna a raiz quadrada | `Math.sqrt(25)` $\rightarrow$ `5.0` |
+| `Math.cbrt(x)` | Retorna a raiz cúbica | `Math.cbrt(27)` $\rightarrow$ `3.0` |
+| `Math.pow(x, y)` | Retorna a potência | `Math.pow(2, 3)` $\rightarrow$ `8.0` |
+| `Math.round(x)` | Arredonda para o inteiro mais próximo | `Math.round(5.8)` $\rightarrow$ `6` |
+| `Math.floor(x)` | Arredonda para baixo | `Math.floor(3.5)` $\rightarrow$ `3` |
+| `Math.ceil(x)` | Arredonda para cima | `Math.ceil(4.1)` $\rightarrow$ `5` |
+| `Math.PI` | Retorna o valor de PI | `Math.PI` $\rightarrow$ `3.14159...` |
+| `Math.E` | Retorna o número de Euler | `Math.E` $\rightarrow$ `2.71828...` |
+
+  > **Observação:** Essa tabela não possui todos os métodos de `Math`, ainda tem métodos relacionado à trigonometria, logaritmos e etc.
+
+
+## Classe Random
+
+Em Java, nós usamos a classe `Random` importada do pacote `java.util` para gerar valores aleatórios
+
+Para usar os métodos, precisamos criar um objeto `Random`
+
+```java
+import java.util.Random;
+
+Random aleatorio = new Random();
+
+int numero =  aleatorio.nextInt();
+```
+
+| Método | Descrição | Exemplo |
+| ------ | --------- | ------- |
+| `nextInt()` | Gera um número inteiro | `-200` |
+| `nextInt(limite)` | Gera um número entre 0 e (limite - 1)| `nextInt(10)` $\rightarrow$ `7` |
+| `nextDouble()` | Gera um decimal entre 0.0 e 1.0 | `0.5329` |
+| `nextFloat()` | Gera um float entre 0.0 e 1.0 | `0.69` |
+| `nextBoolean()` | Gera `true` ou `false` | `false` |
+
+- Observações: <br>
+
+  Você consegue manipular o `nextInt(limite)` para gerar intervalos que não comecem em zero
+
+  ```java
+  Random random = new Random();
+
+  int numero = random.nextInt(10) + 1; // Isso gera um número de 1 a 10
+  int numeroMaior = random.nextInt(51) + 50; // Isso gera um número de 50 a 100
+  ``` 
+
+  O `nextInt(51)` vai gerar um número de 0 a 50, e o `+ 50` vai deslocar para 50 a 100
+
+
+### ThreadLocalRandom
+
+O `ThreadLocalRandom` é uma outra forma de gerar números aleatórios em Java, ela é do pacote `java.util.concurrent`
+
+Diferente de `Random`, nós não precisamos criar um objeto, podemos usar o `ThreadLocalRandom` diretamente
+
+```java
+import java.util.concurrent.ThreadLocalRandom;
+
+int numero = ThreadLocalRandom.current().nextInt();
+```
+
+O `ThreadLocalRandom` permite definir um intervalo
+
+```java
+int dado = ThreadLocalRandom.current().nextInt(1, 7); // Gera um número de 1 a 6
+double nota = ThreadLocalRandom.current().nextDouble(0, 11); // Gera um número de 0.0 a 10.0
+```
+
+> `Random` é suficiente para a maioria dos programas. Já `ThreadLocalRandom` é otimizado para aplicações concorrentes
 
 
 ## Entrada de Dados
@@ -456,7 +581,69 @@ public class Main {
 ```
 
 - Observação: <br>
-Ao usar `nextInt()` seguido de `nextLine()`, é necessário consumir a quebra de linha restante com um `scanner.nextLine()`,
+  Ao usar `nextInt()` seguido de `nextLine()`, é necessário consumir a quebra de linha restante com um `scanner.nextLine()`,
+
+  ```java
+  int idade = scanner.nextInt();
+  scanner.nextLine(); // consome o "\n" que ficou no buffer
+  String nome = scanner.nextLine();
+  ```
+
+
+## Saída de Dados
+
+Para mostramos algo no console, podemos usar diferentes variações do comando `print`
+
+- O `print()` imprime a mensagem no console, uma na frente da outra
+
+  ```java
+  // Damos um espaço no final da mensagem para separá-las na exibição do console
+  System.out.print("ES ");
+  System.out.print("MG ");
+  System.out.print("RJ ");
+  System.out.print("SP ");
+  ```
+  Saída:
+  ```
+  ES MG RJ SP
+  ```
+
+- O `println()` faz uma quebra de linha após imprimir a mensagem no console
+
+  ```java
+  System.out.println("ES");
+  System.out.println("MG");
+  System.out.println("RJ");
+  System.out.println("SP");
+  ```
+  Saída:
+  ```
+  ES
+  MG
+  RJ
+  SP
+  ```
+
+- O `printf()` é usado para formatação de variáveis na mensagem
+
+  ```java
+  String nome = "Maria";
+  int idade = 22;
+  double altura = 1.64;
+
+  System.out.printf("A %s fez %d anos e tem %.2f de altura.", nome, idade, altura);
+  ```
+  Saída:
+  ```
+  A Maria fez 22 anos e tem 1.64 de altura.
+  ```
+
+  Principais marcadores utilizados:
+  - `%s` $\rightarrow$ texto (`String`)
+  - `%d` $\rightarrow$ números inteiros (`int`)
+  - `%f` $\rightarrow$ números decimais (`double`, `float`)
+  - `%.2f` $\rightarrow$ números decimais com duas casas após a vírgula
+
 
 ## Comentários
 
@@ -465,7 +652,7 @@ Em Java, para fazermos comentários no códigos, utilizamos `//` para comentári
 ```java
 // Isso é um comentário de uma linha, ele comenta a linha inteira a partir da //
 
-int numero = 5; // O comentário precisa ser feito depois do ";" pra não quebra o código
+int numero = 5; // O comentário precisa ser feito depois do ";" para não quebrar o código
 
 /*
 Isso é 
@@ -493,7 +680,7 @@ As estruturas condicionais permitem que o programa execute diferentes blocos de 
 
 ### if, else e else-if
 
-O `if` executa um bloco de código apenas se a condição for `true`.
+O `if` executa um bloco de código **apenas** se a condição for `true`.
 
 ```java
 int idade = 20;
@@ -663,23 +850,34 @@ Nesse exemplo, caso `objeto` seja uma `String`, a variável `texto` já será cr
 - As condições do `if` sempre devem resultar em um `boolean`.
 - Diferente do Python, Java exige que a condição seja explicitamente booleana.
 
-Errado:
+  ```python
+  if usuario:
+    # bloco de código
+  ```
+  ```java
+  if (usuario != null) {
+    // bloco de código
+  }
+  ```
 
-```java
-int numero = 10;
+  Errado:
 
-if (numero) { // Erro
-    System.out.println("Olá");
-}
+  ```java
+  int numero = 10;
 
-int numero = 10;
+  if (numero) { // Erro
+      System.out.println("Olá");
+  }
 
-if (numero > 0) { // Certo
-    System.out.println("Olá");
-}
-```
+  int numero = 10;
+
+  if (numero > 0) { // Certo
+      System.out.println("Olá");
+  }
+  ```
 
 - O `switch` funciona com tipos como `byte`, `short`, `int`, `char`, `String` e `enum`, mas não aceita `boolean`, `float`, `double` ou `long`.
+
 
 ## Loops
 
@@ -694,7 +892,7 @@ Utilizamos `for` quando sabemos a quantidade exata de repetições que o laço d
 - Sintaxe: `for (inicialização; condição; incremento/decremento) {...}`
 
   ```java
-  for (int = 0; i < 5; i++) {
+  for (int i = 0; i < 5; i++) {
     System.out.println("Índice: " + i); // imprime de 0 a 4
   }
   ```
@@ -720,7 +918,7 @@ O `while` avalia a condição **antes** de executar o bloco de código. Se a con
 - Sintaxe: `while (condicao) {...}`
 
   ```java
-  int count = 1
+  int count = 1;
 
   while (count <= 10) {
     System.out.print(count + " "); // 1 2 3 4 5 6 7 8 9 10
@@ -747,7 +945,7 @@ Diferente do `while` o `do-while` avalia a condição **depois** de executar o b
 O `break` e `continue` são usados para controlar a execução de laços de repetições, geralmente combinados com um `if` para agirem em momentos específicos
 
 - `break` serve para você encerrar o laço. A execução vai pra primeira linha depois do loop
-- `continue` serve para você pular a execuçã atual do loop e ir direto pra próxima
+- `continue` serve para você pular a execução atual do loop e ir direto pra próxima
 
   ```java
   // Exemplo com break
@@ -779,7 +977,7 @@ Métodos, também conhecidos como funções em algumas linguagens, são blocos d
   }
   ```
 
-  - Observação: um método pode ter vários parâmetro ou nenhum
+  > Observação: um método pode ter vários parâmetros ou nenhum
 
 ### Método com retorno
 
@@ -795,7 +993,7 @@ double media = calcularMedia(8, 6);
 System.out.println("Média: " + media); // 7
 ```
 
-  - Observação: o retorno tem que ser compatível com o tipo declarado no método
+  > Observação: o retorno tem que ser compatível com o tipo declarado no método
 
 ### Método sem retorno (`void`)
 
@@ -840,9 +1038,10 @@ public class Pessoa {
       System.out.println("Olá!");
   }
 
-  Pessoa pessoa = new Pessoa();
-
-  pessoa.falar(); // Olá!
+  public static void main(String[] args) {
+    Pessoa pessoa = new Pessoa();
+    pessoa.falar(); // Olá!
+  }
 
 }
 ```
@@ -866,3 +1065,180 @@ public class Calculadora {
 
 }
 ```
+
+### Parâmetro x Argumento
+
+Os dois termos parecem sinônimos, mas cada um tem seu momento
+
+- Parâmetro é o nome que você dá à entrada quando define o método (é uma variável reservada para receber um valor)
+- Argumento é o valor de verdade que você passa quando chama o método
+
+  ```java
+  public class Main {
+    public static void saudar(String nome) { // nome é o parâmetro
+      System.out.println("Bom dia, " + nome + "!");
+    }
+
+    public static void main(String[] args) {
+      saudar("Victor"); // Victor é o argumento
+      // Saída: Bom dia, Victor!
+    }
+  }
+  ```
+
+## Arrays
+
+Arrays são uma forma de guardar mais de um valor em uma mesma variável ou constante.
+
+### Arrays com tamanho fixo
+
+Podemos instanciar um array de duas formas diferentes, a primeira é indicando somente o tamanho dele 
+
+- Sintaxe: `tipo[] nome = new tipo[x];`
+
+  ```java
+  // Arrays de inteiros
+  int[] numeros = new int[5]; // {0, 0, 0, 0, 0}
+  ```
+
+A segunda forma é atribuindo valor na criação do array
+
+- Sintaxe: `tipo[] nome = {...};`
+
+  ```java
+  // Array de String
+  String[] nomes = {"Ana", "Luca", "Bruno"};
+  ```
+
+- Observação: <br>
+  Quando criamos um array indicando só o tamanho, o Java atribui um valor padrão para cada índice
+
+  | Tipo | Valor Padrão |
+  | ---- | ------------ |
+  | `byte`, `short` e `int` | 0 |
+  | `long` | 0L |
+  | `float` | 0.0f |
+  | `double` | 0.0 |
+  | `char` | '\u0000' |
+  | `boolean` | `false` |
+  | Objeto(`String`, `Integer`) | `null` |
+
+
+- Atribuindo valores: <br>
+  Em Java, usamos o índice para atribuimos um valor à posição indicada
+
+  ```java
+  int[] numeros = new int[5];
+
+  numeros[1] = 2;
+  numeros[3] = 4;
+
+  for (int n : numeros) {
+    System.out.print(n + " "); // 0, 2, 0, 4, 0
+  }
+  ```
+
+- Métodos: <br>
+  Os arrays não possuem métodos próprios, porém podemos usar a classe `Arrays` do pacote `java.util` para usar métodos de manipulação de dados
+
+  | Método | Função |
+  | ------ | ------ |
+  | `sort()` | Ordena o array |
+  | `toString()` | Exibe o conteúdo do array |
+  | `binarySearch()` | Pesquisa em um array ordenado |
+  | `equals()` | Compara o conteúdo de dois arrays |
+  | `fill()` | Preenche todas as posições |
+  | `copyOf()` | Copia um array |
+  | `copyOfRange()` | Copia parte de um array |
+  | `deepToString()` | Exibe arrays multidimensionais |
+  | `deepEquals()` | Compara arrays multidimensionais |
+  | `asList()` | Converte um array em `List` |
+
+
+### Arrays Multidimensionados
+
+Arrays multidimensionados, ou matrizes, são estruturas de dados que organizam elementos em duas ou mais dimensões
+
+- Sintaxe: 
+  - `tipo[][] nome = new tipo[x][y]`
+  - `tipo[][] nome = {...}`
+    ```java
+    int[][] matriz = new int[2][3];
+    /*
+    [0, 0, 0]
+    [0, 0, 0]
+    */
+    ```
+
+    ```java
+    int[][] matriz = {
+      {1, 2, 3},
+      {4, 5, 6}
+    };
+    ```
+
+- Atribuindo valores: <br>
+  Nas matrizes, usamos o índice da linha e da coluna `matriz[linha][coluna] = x` para atribuir um elemento
+
+  ```java
+  int[][] matriz =  new int[2][2];
+
+  matriz[0][0] = 1;
+  matriz[1][1] = 2;
+  /*
+  [1, 0]
+  [0, 2]
+  */
+  ```
+
+
+### Arrays dinâmicos
+
+Para criar arrays com tamanho dinâmico, precisamos importar as classes `List` e `ArrayList` do pacote `java.util`
+
+```java
+import java.util.List;
+import java.util.ArrayList;
+
+public class Main {
+  public static void main(String[] args) {
+    List<Integer> numeros = new ArrayList<>(); // [] -> vazio
+  }
+}
+```
+
+- Atribuindo valores: <br>
+  Usamos o método `.add()` para adicionar um elemento no final do array
+
+  ```java
+  numeros.add(5);
+  numeros.add(3);
+  numeros.add(18);
+
+  // O array "numeros" agora possui os valores: [5, 3, 18]
+  ```
+
+- Percorrendo o array: <br>
+  Para percorrer todo o array, podemos usar o for ou o for-each
+
+  ```java
+  for (int i = 0; i < numeros.size(); i++) {
+    System.out.print(numeros.get(i) + " "); // 5, 3, 18
+  }
+  ```
+
+### Diferenças entre Array e ArrayList
+
+| Array | ArrayList | Funcionalidade |
+| ----- | --------- | -------------- |
+| `int[] num = new int[5]` | `List<Integer> num = new ArrayList<>` | Criação |
+| Tamanho fixo | Tamanho dinâmico | Quantidade de elementos |
+| `arr[i] = x` | `arr.add(x)` | Atribuir um valor |
+| `arr[i]` | `arr.get(i)` | Acessar um elemento |
+| `arr[i] = y` | `arr.set(i, y)` | Modificar um elemento |
+| `arr.length` | `arr.size()` | Obter o tamanho |
+| Não possui métodos | Possui muitos (`contains`, `clear`, `indexOf`) | Manipulação de Dados |
+| Não remove elementos | `arr.remove(i)` | Remoção |
+| Aceita tipos primitivos | Usa objetos (wrapper) | Tipos Suportados |
+| Mais rápido | Um pouco mais lento | Desempenho |
+| Menor | Maior | Uso de Memória |

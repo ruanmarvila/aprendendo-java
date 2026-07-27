@@ -1,3 +1,5 @@
+package src.basico;
+
 public class Inferencia {
     public static void main(String[] args) {
         // O compilador faz a inferência do tipo baseado no valor

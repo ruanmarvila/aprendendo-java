@@ -1,3 +1,5 @@
+package src.basico;
+
 public class Operadores {
     public static void main(String[] args) {
         // Soma ou Concatenção (+)

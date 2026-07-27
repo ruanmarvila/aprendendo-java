@@ -1,19 +1,12 @@
-package desafios;
+package src.desafios.calculadora;
 
 import java.util.Scanner;
 
-public class Calculadora {
+public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            double resultado = 0.0;
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
 
             System.out.println("==== Calculadora ====");
             System.out.println("1. Soma");
@@ -38,32 +31,26 @@ public class Calculadora {
 
             scanner.nextLine();
 
-            if ("1".equals(escolha)) {
-                resultado = numero1 + numero2;
+            double resultado;
+
+            try {
+                resultado = switch (escolha) {
+                    case "1" -> Operacoes.somar(numero1, numero2);
+                    case "2" -> Operacoes.subtrair(numero1, numero2);
+                    case "3" -> Operacoes.multiplicar(numero1, numero2);
+                    case "4" -> Operacoes.dividir(numero1, numero2);
+                    default -> {
+                        System.out.println("Opção inválida");
+                        yield 0;
+                    }
+                };
+                System.out.println("Resultado: " + resultado);
+                
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
-
-            else if ("2".equals(escolha)) {
-                resultado = numero1 - numero2;
-            }
-
-            else if ("3".equals(escolha)) {
-                resultado = numero1 * numero2;
-            }
-
-            else if ("4".equals(escolha)) {
-                if (numero2 != 0) {
-                    resultado = numero1 / numero2;
-                } else {
-                    System.out.println("Não é possível dividr por zero");
-                    continue;
-                }
-            }
-
-            System.out.println("Resultado: " + resultado);
-
 
         }
         scanner.close();
     }
-    
 }

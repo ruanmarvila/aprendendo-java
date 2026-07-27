@@ -1,3 +1,5 @@
+package src.basico;
+
 public class MetodoStrings {
     public static void main(String[] args) {
         String texto = "  Ruan Carlos  ";
