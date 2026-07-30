@@ -1,4 +1,4 @@
-package src.basico;
+package basico;
 
 import java.util.Scanner; // Preciso do Scanner pra consguir ler entrada (input) no terminal
 

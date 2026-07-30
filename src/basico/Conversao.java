@@ -1,4 +1,4 @@
-package src.basico;
+package basico;
 
 public class Conversao {
     public static void main(String[] args) {

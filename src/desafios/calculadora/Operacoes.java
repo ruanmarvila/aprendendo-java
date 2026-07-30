@@ -1,4 +1,4 @@
-package src.desafios.calculadora;
+package desafios.calculadora;
 
 public class Operacoes {
     

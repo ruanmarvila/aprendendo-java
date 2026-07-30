@@ -1,4 +1,4 @@
-package src.basico;
+package basico;
 
 import java.util.Arrays;
 import java.util.List;

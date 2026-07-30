@@ -1,4 +1,4 @@
-package src.desafios.calculadora;
+package desafios.calculadora;
 
 import java.util.Scanner;
 

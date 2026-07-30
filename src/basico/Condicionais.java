@@ -1,4 +1,5 @@
-package src.basico;
+package basico;
+
 
 import java.util.Scanner;
 
