@@ -1,4 +1,4 @@
-package poo.excecoes;
+package excecoes.argumentos;
 
 public class ContaBancaria {
     private double saldo;

@@ -1,4 +1,4 @@
-package poo.excecoes;
+package excecoes.argumentos;
 
 public class Main {
     public static void main(String[] args) {
@@ -6,7 +6,7 @@ public class Main {
         try {
             conta1.sacar(1500);
         } catch (IllegalArgumentException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 }

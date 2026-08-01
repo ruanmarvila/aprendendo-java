@@ -11,6 +11,7 @@ Meu objetivo é registrar a evolução do aprendizado, criar um material de cons
 ## Índice
 - [Básico](docs/01-Basico.md)
 - [POO](docs/02-POO.md)
+- [Exceções](docs/03-Excecoes.md)
 
 ## Progresso
 - [x] Conceitos Básicos
@@ -26,7 +27,7 @@ Meu objetivo é registrar a evolução do aprendizado, criar um material de cons
   - [x] Loops
   - [x] Métodos
   - [x] Arrays
-- [ ] POO
+- [x] POO
   - [x] Classes
   - [x] Objetos
   - [x] Construtores
@@ -35,7 +36,11 @@ Meu objetivo é registrar a evolução do aprendizado, criar um material de cons
   - [x] Polimorfismo
   - [x] Classes Abstratas
   - [x] Interfaces
-  - [ ] Exceções
+- [x] Exceções
+  - [x] Try/Catch e Finally
+  - [x] Throw e Throws
+  - [x] Tipos de Exceções
+  - [x] Exceções Customizadas
 - [ ] Java Moderno
   - [ ] Collections
   - [ ] Generics

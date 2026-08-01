@@ -26,6 +26,7 @@
   - [Atalhos](#atalhos-para-comentar)
 - [Condicionais](#condicionais-if-else-if-else-switch-case)
   - [If, Else e Else-if](#if-else-e-else-if)
+    - [If Aninhado](#if-aninhado)
   - [Operador Ternário](#operador-ternário)
   - [Switch](#switch)
     - [Múltiplos Casos](#switch-com-múltiplos-casos)
@@ -34,6 +35,7 @@
     - [Observações](#observações-1)
 - [Loops](#loops)
   - [For e For-each](#for-e-for-each)
+    - [For Aninhado](#for-aninhado)
   - [While e Do-While](#while-e-do-while)
   - [Controle de Repetição](#controle-de-repetição-break-e-continue)
 - [Métodos](#métodos)
@@ -140,21 +142,21 @@ Java possui 8 tipos primitivos:
 
 | Tipo | Tamanho | Exemplo |
 | ---- | ------- | ------- |
-| byte | 8 bits | byte idade = 20; |
-| short | 16 bits | short ano = 2026; |
-| int | 32 bits | int numero = 100; |
-| long | 64 bits | long populacao = 8000000L; |
-| float | 32 bits | float altura = 1.75f; |
-| double | 64 bits | double salario = 2500.50; |
-| char | 16 bits | char letra = 'A'; |
-| boolean | Não definido | boolean ativo = true; |
+| `byte` | 8 bits | `byte idade = 20;` |
+| `short` | 16 bits | `short ano = 2026;` |
+| `int` | 32 bits | `int numero = 100;` |
+| `long` | 64 bits | `long populacao = 8000000L;` |
+| `float` | 32 bits | `float altura = 1.75f;` |
+| `double` | 64 bits | `double salario = 2500.50;` |
+| `char` | 16 bits | `char letra = 'A';` |
+| `boolean` | Não definido | `boolean ativo = true;` |
 
 Além dos tipos primitivos, o Java possui classes equivalentes chamadas Wrappers.
 
-- int -> Integer
-- double -> Double
-- char -> Character
-- boolean -> Boolean
+- `int` $\rightarrow$ `Integer`
+- `double` $\rightarrow$ `Double`
+- `char` $\rightarrow$ `Character`
+- `boolean` $\rightarrow$ `Boolean`
 
 
 ## Casting
@@ -467,7 +469,7 @@ import java.util.Random;
 
 Random aleatorio = new Random();
 
-int numero =  aleatorio.nextInt();
+int numero = aleatorio.nextInt();
 ```
 
 | Método | Descrição | Exemplo |
@@ -678,6 +680,55 @@ if (nota >= 90) {
 
 - Assim que uma condição for verdadeira, as demais não serão avaliadas.
 
+#### If Aninhado
+
+Um `if` pode conter outro `if` dentro dele, permitindo verificar uma condição só depois que a primeira já foi satisfeita.
+
+```java
+int idade = 20;
+boolean possuiCarteira = true;
+
+if (idade >= 18) {
+    if (possuiCarteira) {
+        System.out.println("Pode dirigir");
+    } else {
+        System.out.println("Maior de idade, mas sem carteira");
+    }
+} else {
+    System.out.println("Menor de idade, não pode dirigir");
+}
+```
+
+- O `if` interno só é avaliado se o `if` externo for `true`. Nesse exemplo, `possuiCarteira` nem é verificado se `idade < 18`.
+
+**If aninhado x `&&`:** quando as condições aninhadas apenas precisam ser todas verdadeiras pra executar o mesmo bloco, geralmente é mais limpo combiná-las com `&&` em vez de aninhar.
+
+```java
+// Aninhado
+if (idade >= 18) {
+    if (possuiCarteira) {
+        System.out.println("Pode dirigir");
+    }
+}
+
+// Equivalente, mais direto
+if (idade >= 18 && possuiCarteira) {
+    System.out.println("Pode dirigir");
+}
+```
+
+> Aninhar vale a pena quando cada nível precisa de uma **resposta diferente** para a condição interna (como no primeiro exemplo, onde "maior de idade sem carteira" é um caso à parte). Se o resultado final é só "verdadeiro ou falso" pro bloco inteiro, `&&` é mais legível.
+
+> **Cuidado com o "else solto":** quando há `if` aninhado sem chaves `{}`, o `else` sempre se associa ao `if` mais próximo, o que pode não ser o que você espera. Por isso, é uma boa prática **sempre usar chaves**, mesmo em blocos de uma linha só.
+
+```java
+  if (idade >= 18)
+      if (possuiCarteira)
+          System.out.println("Pode dirigir");
+  else // esse "else" pertence ao "if (possuiCarteira)", não ao "if (idade >= 18)"!
+      System.out.println("Sem carteira");
+```
+
 ### Operador Ternário
 
 Quando queremos escolher entre apenas dois valores, podemos utilizar o operador ternário (`? :`).
@@ -866,6 +917,60 @@ Utilizamos `for-each` para percorremos arrays e coleções como (`List`, `Set`, 
     System.out.println("Fruta: " + fruta);
   }
   ```
+
+#### For Aninhado
+
+Um `for` pode conter outro `for` dentro dele — chamado de **loop aninhado**. É muito usado para percorrer estruturas com mais de uma dimensão, como matrizes.
+
+```java
+for (int i = 0; i < 3; i++) {       // loop externo: linhas
+    for (int j = 0; j < 3; j++) {   // loop interno: colunas
+        System.out.print(i + "," + j + " ");
+    }
+    System.out.println(); // quebra linha a cada volta do loop externo
+}
+/*
+Saída:
+0,0 0,1 0,2 
+1,0 1,1 1,2 
+2,0 2,1 2,2 
+*/
+```
+
+- O loop interno completa **todas** as suas voltas antes do loop externo avançar uma única vez.
+
+**Percorrendo uma matriz:**
+
+```java
+int[][] matriz = {
+    {1, 2, 3},
+    {4, 5, 6}
+};
+
+for (int i = 0; i < matriz.length; i++) {        // percorre as linhas
+    for (int j = 0; j < matriz[i].length; j++) {  // percorre as colunas da linha i
+        System.out.print(matriz[i][j] + " ");
+    }
+    System.out.println();
+}
+/*
+1 2 3 
+4 5 6 
+*/
+```
+
+> `matriz.length` retorna o número de linhas, e `matriz[i].length` retorna o número de colunas *daquela linha específica* — importante porque em Java uma matriz pode ter linhas de tamanhos diferentes (matriz "irregular"/*jagged array*).
+
+Também é possível usar `for-each` aninhado, mais direto quando você só precisa dos valores, sem os índices:
+
+```java
+for (int[] linha : matriz) {
+    for (int valor : linha) {
+        System.out.print(valor + " ");
+    }
+    System.out.println();
+}
+```
 
 ### While e Do-While
 
