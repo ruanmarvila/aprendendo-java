@@ -12,6 +12,8 @@ Meu objetivo é registrar a evolução do aprendizado, criar um material de cons
 - [Básico](docs/01-Basico.md)
 - [POO](docs/02-POO.md)
 - [Exceções](docs/03-Excecoes.md)
+- [Enums](docs/04-Enums.md)
+- [Collections e Generics](docs/05-Collections-Generics.md)
 
 ## Progresso
 - [x] Conceitos Básicos
@@ -42,8 +44,8 @@ Meu objetivo é registrar a evolução do aprendizado, criar um material de cons
   - [x] Tipos de Exceções
   - [x] Exceções Customizadas
 - [ ] Java Moderno
-  - [ ] Collections
-  - [ ] Generics
+  - [x] Collections
+  - [x] Generics
   - [ ] Lambdas
   - [ ] Streams
   - [ ] Records
