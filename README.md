@@ -14,6 +14,11 @@ Meu objetivo é registrar a evolução do aprendizado, criar um material de cons
 - [Exceções](docs/03-Excecoes.md)
 - [Enums](docs/04-Enums.md)
 - [Collections e Generics](docs/05-Collections-Generics.md)
+- [Lambdas e Interfaces Funcionais](docs/06-Lambdas-Interfaces-Funcionais.md)
+- [Streams](docs/07-Streams.md)
+- [Records](docs/08-Records.md)
+- [I/O](docs/09-Leitura-e-Escrita-de-Arquivos.md)
+- [Maven](docs/10-Maven.md)
 
 ## Progresso
 - [x] Conceitos Básicos
@@ -43,12 +48,13 @@ Meu objetivo é registrar a evolução do aprendizado, criar um material de cons
   - [x] Throw e Throws
   - [x] Tipos de Exceções
   - [x] Exceções Customizadas
-- [ ] Java Moderno
+- [x] Java Moderno
   - [x] Collections
   - [x] Generics
-  - [ ] Lambdas
-  - [ ] Streams
-  - [ ] Records
-  - [ ] Maven
-  - [ ] JUnit
+  - [x] Lambdas
+  - [x] Streams
+  - [x] Records
+  - [x] I/O
+  - [x] Maven
 - [ ] Spring Boot
+  - [ ] JUnit
