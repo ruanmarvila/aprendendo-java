@@ -56,5 +56,16 @@ Meu objetivo é registrar a evolução do aprendizado, criar um material de cons
   - [x] Records
   - [x] I/O
   - [x] Maven
-- [ ] Spring Boot
+- [ ] Spring Framework
+  - [ ] Spring Core
+    - [ ] IoC e DI
+    - [ ] Beans e Context
+  - [ ] Spring Boot
+  - [ ] Spring MVC / REST
+  - [ ] Persistência
+    - [ ] JDBC
+    - [ ] JPA + H2
+    - [ ] PostgreSQL + Docker
+  - [ ] AOP
+  - [ ] Validação e tratamento de erros
   - [ ] JUnit
